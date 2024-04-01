@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div class="article-viewer markdown-body cache result" data-v-2c6459d4="" id="article-root" itemprop="articleBody">
+ <style>
+  .markdown-body{word-break:break-word;line-height:1.75;font-weight:400;font-size:16px;overflow-x:hidden;color:#252933}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{line-height:1.5;margin-top:35px;margin-bottom:10px;padding-bottom:5px}.markdown-body h1{font-size:24px;line-height:38px;margin-bottom:5px}.markdown-body h2{font-size:22px;line-height:34px;padding-bottom:12px;border-bottom:1px solid #ececec}.markdown-body h3{font-size:20px;line-height:28px}.markdown-body h4{font-size:18px;line-height:26px}.markdown-body h5{font-size:17px;line-height:24px}.markdown-body h6{font-size:16px;line-height:24px}.markdown-body p{line-height:inherit;margin-top:22px;margin-bottom:22px}.markdown-body img{max-width:100%}.markdown-body hr{border:none;border-top:1px solid #ddd;margin-top:32px;margin-bottom:32px}.markdown-body code{word-break:break-word;border-radius:2px;overflow-x:auto;background-color:#fff5f5;color:#ff502c;font-size:.87em;padding:.065em .4em}.markdown-body code,.markdown-body pre{font-family:Menlo,Monaco,Consolas,Courier New,monospace}.markdown-body pre{overflow:auto;position:relative;line-height:1.75}.markdown-body pre>code{font-size:12px;padding:15px 12px;margin:0;word-break:normal;display:block;overflow-x:auto;color:#333;background:#f8f8f8}.markdown-body a{text-decoration:none;color:#0269c8;border-bottom:1px solid #d1e9ff}.markdown-body a:active,.markdown-body a:hover{color:#275b8c}.markdown-body table{display:inline-block!important;font-size:12px;width:auto;max-width:100%;overflow:auto;border:1px solid #f6f6f6}.markdown-body thead{background:#f6f6f6;color:#000;text-align:left}.markdown-body tr:nth-child(2n){background-color:#fcfcfc}.markdown-body td,.markdown-body th{padding:12px 7px;line-height:24px}.markdown-body td{min-width:120px}.markdown-body blockquote{color:#666;padding:1px 23px;margin:22px 0;border-left:4px solid #cbcbcb;background-color:#f8f8f8}.markdown-body blockquote:after{display:block;content:""}.markdown-body blockquote>p{margin:10px 0}.markdown-body ol,.markdown-body ul{padding-left:28px}.markdown-body ol li,.markdown-body ul li{margin-bottom:0;list-style:inherit}.markdown-body ol li .task-list-item,.markdown-body ul li .task-list-item{list-style:none}.markdown-body ol li .task-list-item ol,.markdown-body ol li .task-list-item ul,.markdown-body ul li .task-list-item ol,.markdown-body ul li .task-list-item ul{margin-top:0}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:3px}.markdown-body ol li{padding-left:6px}.markdown-body .contains-task-list{padding-left:0}.markdown-body .task-list-item{list-style:none}@media (max-width:720px){.markdown-body h1{font-size:24px}.markdown-body h2{font-size:20px}.markdown-body h3{font-size:18px}}
+ </style>
+ <style data-highlight="" data-highlight-key="juejin">
+  .markdown-body pre,.markdown-body pre>code.hljs{color:#333;background:#f8f8f8}.hljs-comment,.hljs-quote{color:#998;font-style:italic}.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#333;font-weight:700}.hljs-literal,.hljs-number,.hljs-tag .hljs-attr,.hljs-template-variable,.hljs-variable{color:teal}.hljs-doctag,.hljs-string{color:#d14}.hljs-section,.hljs-selector-id,.hljs-title{color:#900;font-weight:700}.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type{color:#458;font-weight:700}.hljs-attribute,.hljs-name,.hljs-tag{color:navy;font-weight:400}.hljs-link,.hljs-regexp{color:#009926}.hljs-bullet,.hljs-symbol{color:#990073}.hljs-built_in,.hljs-builtin-name{color:#0086b3}.hljs-meta{color:#999;font-weight:700}.hljs-deletion{background:#fdd}.hljs-addition{background:#dfd}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
+ </style>
+ <p>
+  由于 Docker Desktop 自带 Kubernetes 选项，对于新手来说安装 Kubernetes 省心不少。
+在安装过程中容易出问题的地方是 Windows 版本不满足最低要求，比如 Windows 10 家庭版很可能安装 Docker Desktop 不成功，对于系统是 Win7/Win8/Win10 家庭版的用户可尝试通过 Docker Toolbox 安装 Docker Desktop。
+ </p>
+ <h2 data-id="heading-0">
+  安装 WSL2/Hyper-V
+ </h2>
+ <p>
+  对于不同的 Windows 版本，需要安装 WSL2 或者 Hyper-V。请结合实际的 Windows 版本，搜索对应的教程安装 WSL2 或者 Hyper-V，比如可以参考以下教程：
+ </p>
+ <ul>
+  <li>
+   <a href="https://link.juejin.cn?target=https%3A%2F%2Fblog.csdn.net%2FB11050729%2Farticle%2Fdetails%2F132002572" ref="nofollow noopener noreferrer" target="_blank" title="https://blog.csdn.net/B11050729/article/details/132002572">
+    Windows Docker Desktop 安装
+   </a>
+  </li>
+  <li>
+   <a href="https://link.juejin.cn?target=https%3A%2F%2Fdocs.docker.com%2Fdesktop%2Ftroubleshoot%2Ftopics%2F%23virtualization" ref="nofollow noopener noreferrer" target="_blank" title="https://docs.docker.com/desktop/troubleshoot/topics/#virtualization">
+    docs.docker.com/desktop/tro…
+   </a>
+  </li>
+ </ul>
+ <h2 data-id="heading-1">
+  下载 Docker Desktop for windows
+ </h2>
+ <p>
+  可以通过点击
+  <a href="https://link.juejin.cn?target=https%3A%2F%2Fdocs.docker.com%2Fdesktop%2Finstall%2Fwindows-install%2F" ref="nofollow noopener noreferrer" target="_blank" title="https://docs.docker.com/desktop/install/windows-install/">
+   链接
+  </a>
+  进入 Docker 官方安装指南页面下载安装包。
+ </p>
+ <p>
+  ![image.png](https://hg-tech-1300607181.cos.ap-guangzhou.myqcloud.com/blog/5d7aaa8732334b3ca21309cdb0de1248~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp)
+ </p>
+ <h2 data-id="heading-2">
+  安装 Docker Desktop
+ </h2>
+ <p>
+  双击下载完成的 "Docker Desktop Installer.exe" 去安装 Docker Desktop。
+ </p>
+ <p>
+  ![image.png](https://hg-tech-1300607181.cos.ap-guangzhou.myqcloud.com/blog/64c1166f680f4f43ba0680ac26406ba0~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp)
+ </p>
+ <p>
+  备注：如果在安装确认中提示 "Use WSL 2 instead of Hyper-V" 选项，
+请根据步骤 "安装 WSL2/Hyper-V" 使用的方式选择。
+ </p>
+ <h2 data-id="heading-3">
+  安装 Kubernetes
+ </h2>
+ <p>
+  勾上 "Enable Kubernetes" 然后点击 "Apply &amp; restart" 安装 Kubernetes。
+ </p>
+ <p>
+  ![image.png](https://hg-tech-1300607181.cos.ap-guangzhou.myqcloud.com/blog/dba5df15efeb44e0b2d0993a1904edd2~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp)
+ </p>
+ <h2 data-id="heading-4">
+  部署 Kubernetes 仪表盘
+ </h2>
+ <p>
+  默认情况下不会部署 Dashboard，可以通过以下命令部署。
+ </p>
+ <pre>```bash
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+
+```</pre>
+ <p>
+  如果上述命令执行出错，可以在浏览器打开网址
+  <a href="https://link.juejin.cn?target=https%3A%2F%2Fraw.githubusercontent.com%2Fkubernetes%2Fdashboard%2Fv2.7.0%2Faio%2Fdeploy%2Frecommended.yaml" ref="nofollow noopener noreferrer" target="_blank" title="https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml">
+   recommended.yaml
+  </a>
+  并另存到本地，然后执行以下命令。
+ </p>
+ <pre>```plaintext
+kubectl apply -f 替换成实际的文件路径
+
+```</pre>
+ <h2 data-id="heading-5">
+  创建示例用户
+ </h2>
+ <p>
+  ![image.png](https://hg-tech-1300607181.cos.ap-guangzhou.myqcloud.com/blog/7e77d783c96344f39629113d6bf1c7a7~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp)
+ </p>
+ <p>
+  新建文件保存下方创建 ServiceAccount 的内容，假设该文件的名称是 dashboard-service-account-adminuser.yaml。
+ </p>
+ <pre>```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: admin-user
+  namespace: kubernetes-dashboard
+
+```</pre>
+ <p>
+  执行以下命令生效上述 dashboard-service-account-adminuser.yaml 配置。
+ </p>
+ <pre>```plaintext
+kubectl apply -f dashboard-service-account-adminuser.yaml
+
+```</pre>
+ <p>
+  新建文件保存下方创建 ClusterRoleBinding 的内容，假设该文件的名称是 dashboard-cluster-role-binging-adminuser.yaml。
+ </p>
+ <pre>```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: admin-user
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: admin-user
+  namespace: kubernetes-dashboard
+
+```</pre>
+ <p>
+  执行以下命令生效上述 dashboard-cluster-role-binging-adminuser.yaml 配置。
+ </p>
+ <pre>```plaintext
+kubectl apply -f dashboard-cluster-role-binging-adminuser.yaml
+
+```</pre>
+ <p>
+  新建文件保存下方创建 Secret 的内容，假设该文件的名称是 dashboard-secret-adminuser.yaml。(用于获取长期访问令牌 long-lived Bearer Token)
+ </p>
+ <pre>```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: admin-user
+  namespace: kubernetes-dashboard
+  annotations:
+    kubernetes.io/service-account.name: "admin-user"   
+type: kubernetes.io/service-account-token  
+
+```</pre>
+ <p>
+  执行以下命令生效上述 dashboard-secret-adminuser.yaml 配置。
+ </p>
+ <pre>```plaintext
+kubectl apply -f dashboard-secret-adminuser.yaml
+
+```</pre>
+ <h2 data-id="heading-6">
+  启用 Kubernetes 仪表盘
+ </h2>
+ <p>
+  执行以下命令启用 Dashboard。
+ </p>
+ <pre>```plaintext
+kubectl proxy
+
+```</pre>
+ <p>
+  ![image.png](https://hg-tech-1300607181.cos.ap-guangzhou.myqcloud.com/blog/b8847a064c2e458ba8a9385f43a434e1~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp)
+ </p>
+ <h2 data-id="heading-7">
+  访问 Kubernetes 仪表盘
+ </h2>
+ <p>
+  点击
+  <a href="https://link.juejin.cn?target=http%3A%2F%2Flocalhost%3A8001%2Fapi%2Fv1%2Fnamespaces%2Fkubernetes-dashboard%2Fservices%2Fhttps%3Akubernetes-dashboard%3A%2Fproxy%2F" ref="nofollow noopener noreferrer" target="_blank" title="http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/">
+   http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+  </a>
+  打开仪表盘。
+ </p>
+ <p>
+  ![image.png](https://hg-tech-1300607181.cos.ap-guangzhou.myqcloud.com/blog/6ba614e76e6e41c2878fdf0547b943dd~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp)
+ </p>
+ <p>
+  可以通过以下命令获取 Token。
+ </p>
+ <pre>```sql
+kubectl -n kubernetes-dashboard create token admin-user
+
+```</pre>
+ <p>
+  ![image.png](https://hg-tech-1300607181.cos.ap-guangzhou.myqcloud.com/blog/ae44b7b95deb4bd2ab98a43dcb274ca9~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp)
+ </p>
+ <p>
+  或者通过以下命令获取长期访问 token。(以下命令在 PowerShell 下执行可能会出错，可使用 Git Bash 执行)
+ </p>
+ <pre>```ini
+kubectl get secret admin-user -n kubernetes-dashboard -o jsonpath={".data.token"} | base64 -d
+
+```</pre>
+ <p>
+  ![image.png](https://hg-tech-1300607181.cos.ap-guangzhou.myqcloud.com/blog/891d6a2aa2a64fe6a00ad77ee236d188~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp)
+ </p>
+ <p>
+  通过上述获取的 token 登录进入仪表盘。
+ </p>
+ <p>
+  ![image.png](https://hg-tech-1300607181.cos.ap-guangzhou.myqcloud.com/blog/13b26886e87f477aa2eddb0228bc4320~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp)
+ </p>
+ <h2 data-id="heading-8">
+  参考资料
+ </h2>
+ <ul>
+  <li>
+   Docker 官方安装指南
+   <a href="https://link.juejin.cn?target=https%3A%2F%2Fdocs.docker.com%2Fdesktop%2Finstall%2Fwindows-install%2F" ref="nofollow noopener noreferrer" target="_blank" title="https://docs.docker.com/desktop/install/windows-install/">
+    Install Docker Desktop on Windows | Docker Docs
+   </a>
+  </li>
+  <li>
+   Kubernetes 官方文档
+   <a href="https://link.juejin.cn?target=https%3A%2F%2Fkubernetes.io%2Fzh-cn%2Fdocs%2Ftasks%2Faccess-application-cluster%2Fweb-ui-dashboard%2F" ref="nofollow noopener noreferrer" target="_blank" title="https://kubernetes.io/zh-cn/docs/tasks/access-application-cluster/web-ui-dashboard/">
+    部署和访问 Kubernetes 仪表板（Dashboard） | Kubernetes
+   </a>
+  </li>
+  <li>
+   微软官方文档
+   <a href="https://link.juejin.cn?target=https%3A%2F%2Flearn.microsoft.com%2Fen-us%2Fwindows%2Fwsl%2Finstall" ref="nofollow noopener noreferrer" target="_blank" title="https://learn.microsoft.com/en-us/windows/wsl/install">
+    Install WSL | Microsoft Learn
+   </a>
+  </li>
+ </ul>
+</div>
+
+</body>
+</html>
