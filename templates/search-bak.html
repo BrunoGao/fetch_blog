@@ -61,46 +61,47 @@
           <div data-v-090682e2="" data-v-69f75cae="">
             <div class="result-list" data-v-090682e2="">
               <ul data-v-43394619="" data-v-69f75cae="" class="main-list" data-v-090682e2="">
-              
-                {% for article in blogs %}
+                {% set base_url = "https://juejin.cn" %}
+                {% set base_name = "稀土掘金" %}
+                {% for article in data  if article.result_type == 2 %}
                 <li data-v-43394619="" class="item">
                   <div data-v-0347d762="" data-v-43394619="" class="entry">
-                    <a data-v-65b50b51="" data-v-0347d762="" href="{{ article.url}}" target="_blank" rel="" class="jj-link entry-link">
+                    <a data-v-65b50b51="" data-v-0347d762="" href="{{ base_url }}/post/{{article.result_model.article_id}}?searchId=20240401181139ED938895D9504232BCC1" target="_blank" rel="" class="jj-link entry-link">
                       <object data-v-0347d762="" data-v-65b50b51="">
                         <div data-v-0347d762="" data-v-65b50b51="" class="content-box">
                           <div data-v-0347d762="" data-v-65b50b51="" class="info-box">
                             <div data-v-0347d762="" data-v-65b50b51="" class="info-row meta-row">
                               <ul data-v-0347d762="" data-v-65b50b51="" class="meta-list">
                                 <li data-v-0347d762="" data-v-65b50b51="" class="item username clickable">
-                                  <a data-v-65b50b51="" data-v-0347d762="" href="{{ article.user_id }}" target="_blank" rel="" class="jj-link user-message"><div data-v-487cbd49="" data-v-d7aef884="" data-v-0347d762="" class="popover-box user-popover" data-v-65b50b51=""><!---->  {{ article.user_name }}</div></a></li> 
-                                <li data-v-0347d762="" data-v-65b50b51="" class="item">{{ article.last_modify }}天</li> 
+                                  <a data-v-65b50b51="" data-v-0347d762="" href="{{ base_url }}/user/{{article.result_model.article_info.user_id}}" target="_blank" rel="" class="jj-link user-message"><div data-v-487cbd49="" data-v-d7aef884="" data-v-0347d762="" class="popover-box user-popover" data-v-65b50b51=""><!---->  {{ article.result_model.author_user_info.user_name }}</div></a></li> 
+                                <li data-v-0347d762="" data-v-65b50b51="" class="item">{{ article.result_model.article_info.mtime | days_since }}天</li> 
                                 <li data-v-0347d762="" data-v-65b50b51="" class="item tag">
-                                  {% for tag in article.tags %}
-                                      <a data-v-65b50b51="" data-v-0347d762="" href="{{ article.base_url }}/tag/{{tag.tag_name}}" target="_blank" rel="" class="jj-link tag">{{tag.tag_name}}</a>
+                                  {% for tag in article.result_model.tags %}
+                                      <a data-v-65b50b51="" data-v-0347d762="" href="{{ base_url }}/tag/{{tag.tag_name}}" target="_blank" rel="" class="jj-link tag">{{tag.tag_name}}</a>
                                   {% endfor %}
                                 </li>
                               </ul>
                             </div> 
                             <div data-v-0347d762="" data-v-65b50b51="" class="info-row title-row">
-                              <a data-v-65b50b51="" data-v-0347d762="" href="{{ article.url}}" target="_blank" rel="" class="jj-link title">
-                                    <div data-v-0347d762="" data-v-65b50b51="">{{ article.title }}</div>
+                              <a data-v-65b50b51="" data-v-0347d762="" href="{{ base_url }}post/{{article.result_model.article_id}}?searchId=20240401181139ED938895D9504232BCC1" target="_blank" rel="" class="jj-link title">
+                                    <div data-v-0347d762="" data-v-65b50b51="">{{ article.result_model.article_info.title }}</div>
                                 </a>
                             </div> 
-                            <div data-v-0347d762="" data-v-65b50b51="" class="info-row abstract-row"><a data-v-65b50b51="" data-v-0347d762="" href="{{ article.url}}" target="_blank" rel="" class="jj-link abstract"><div data-v-0347d762="" data-v-65b50b51="">{{ article.brief}}</div></a></div> 
+                            <div data-v-0347d762="" data-v-65b50b51="" class="info-row abstract-row"><a data-v-65b50b51="" data-v-0347d762="" href="{{ base_url }}/post/{{article.result_model.article_id}}?searchId=20240401181139ED938895D9504232BCC1" target="_blank" rel="" class="jj-link abstract"><div data-v-0347d762="" data-v-65b50b51="">{{ article.result_model.article_info.brief_content}}</div></a></div> 
                             <div data-v-0347d762="" data-v-65b50b51="" class="info-row action-row">
                               <ul data-v-0347d762="" data-v-65b50b51="" class="action-list">
-                                <li data-v-0347d762="" data-v-65b50b51="" class="item like clickable"><a data-v-0347d762="" data-v-65b50b51="" class="title-box"><img data-v-0347d762="" data-v-65b50b51="" src="//lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/e9d76988a7ae3392dc967cfbb64cd887.svg" class="icon"> <span data-v-0347d762="" data-v-65b50b51="" class="count">{{ article.digg_count}}</span></a></li>
-                                <li data-v-0347d762="" data-v-65b50b51="" class="item like clickable"><button>{{ article.base_name }}</button></li>
+                                <li data-v-0347d762="" data-v-65b50b51="" class="item like clickable"><a data-v-0347d762="" data-v-65b50b51="" class="title-box"><img data-v-0347d762="" data-v-65b50b51="" src="//lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/e9d76988a7ae3392dc967cfbb64cd887.svg" class="icon"> <span data-v-0347d762="" data-v-65b50b51="" class="count">{{ article.result_model.article_info.digg_count}}</span></a></li>
+                                <li data-v-0347d762="" data-v-65b50b51="" class="item like clickable"><button>{{ base_name }}</button></li>
                                 <li data-v-0347d762="" data-v-65b50b51="" class="item like clickable">
-                                  <button class="crawl-article-btn" data-article-url="{{ article.url}}" style="background-color: orange;">一键抓取</button>
+                                  <button class="crawl-article-btn" data-article-url="{{ base_url }}/post/{{article.result_model.article_id}}" style="background-color: orange;">一键抓取</button>
                                 </li> 
                               
                               </ul>
                             </div>
                           </div>
 
-                          {% if article.imgUrl  %}
-                              <img data-v-5244ef91="" data-v-0347d762="" src="{{ article.imgUrl  }}" alt="image" class="lazy thumb" data-v-65b50b51="" loading="lazy" style="">
+                          {% if article.result_model.article_info.cover_image | changeImageUrl %}
+                              <img data-v-5244ef91="" data-v-0347d762="" src="{{ article.result_model.article_info.cover_image | changeImageUrl }}" alt="image" class="lazy thumb" data-v-65b50b51="" loading="lazy" style="">
                           {% endif %}
                         
                         </div>

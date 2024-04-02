@@ -17,7 +17,7 @@ def search():
     keyword = request.form['keyword']
     blogs = search_juejin(keyword)
     # 这里可以添加其他网站的搜索结果，并进行去重和排序
-    return render_template('search.html', data=blogs)
+    return render_template('search.html', blogs=blogs)
 
 # 定义过滤器
 def days_since(timestamp):
@@ -40,24 +40,45 @@ app.jinja_env.filters['changeImageUrl'] = changeImageUrl
 
 
 def search_juejin(keyword):
-    # 示例：调用掘金搜索API（请替换为实际可用的API）
+    base_url = "https://juejin.cn"
+    base_name = "稀土掘金"
     url = f'https://api.juejin.cn/search_api/v1/search?aid=2608&uuid=7307518557755196954&spider=0&query={keyword}&id_type=0&cursor=0&limit=20&search_type=0&sort_type=0&version=1'
     print("url: " + url)
     headers = {'Content-Type': 'application/json'}
     response = requests.get(url, headers=headers)
-    #print( response.json())
+    blogs = []  # Initialize blogs list
     if response.status_code == 200:
         try:
             results = response.json()['data']
+            for result in results:
+                # Extracting necessary details from each article
+                article_info = result['result_model']['article_info']
+                author_info = result['result_model']['author_user_info']
+                tags = result['result_model'].get('tags', [])
+                # Preparing tags list
+                article_tags = [{'tag_name': tag['tag_name']} for tag in tags]
+                # Processing cover_image with changeImageUrl
+                cover_image_url = article_info.get('cover_image', '')
+                processed_cover_image_url = changeImageUrl(cover_image_url)
+                # Appending article details to blogs list
+                blogs.append({
+                    'title': article_info['title'],
+                    'url': base_url + "/post/" + article_info['article_id'],
+                    'brief': article_info['brief_content'],
+                    'user_id': author_info['user_id'],
+                    'user_name': base_url + author_info['user_name'],
+                    'last_modify': days_since(article_info['mtime']),
+                    'tags': article_tags,
+                    'digg_count': article_info['digg_count'],
+                    'base_name': base_name,
+                    'base_url': base_url,
+                    'imgUrl': processed_cover_image_url
+                })
         except ValueError:  # includes simplejson.decoder.JSONDecodeError
             print('Decoding JSON has failed')
-            results = []
     else:
         print(f"Failed to fetch data: {response.status_code}")
-        results = []
-    #print("results: " + str(results))
-    #blogs = [{'title': result['title'], 'url': result['link_url'], 'summary': result['brief_content']} for result in results]
-    return results
+    return blogs
 @app.route('/crawl-article')
 def crawl_article():
     article_url = request.args.get('url')
