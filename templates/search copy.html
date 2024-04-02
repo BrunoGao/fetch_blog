@@ -11,9 +11,6 @@
           color: red;
           font-weight: bold;
       }
-      .hidden {
-          display: none;
-      }
   </style>
 
 </head>
@@ -43,22 +40,20 @@
           <header class="list-header" data-v-69f75cae="">
             <nav role="navigation" class="list-nav" data-v-69f75cae="">
               <ul class="nav-list left" data-v-69f75cae="">
-                <li class="nav-item active" data-v-69f75cae=""><a href="{{ url_for('search', keyword=search_query, source=source, sort_by='custom') }}">综合排序</a></li>
-                <li class="nav-item" data-v-69f75cae=""><a href="{{ url_for('search', keyword=search_query, source=source, sort_by='latest') }}">最新优先</a></li>
-                <li class="nav-item" data-v-69f75cae=""><a href="{{ url_for('search', keyword=search_query, source=source, sort_by='hottest') }}">最热优先</a></li>
+                <li class="nav-item active" data-v-69f75cae=""><a href="{{ base_url }}/search?query={{ search_query }}&amp;fromSeo=0&amp;fromHistory=0&amp;fromSuggest=0&amp;enterFrom=home_page&amp;type=0&amp;sort=0" data-v-69f75cae="">综合排序</a></li>
+                <li class="nav-item" data-v-69f75cae=""><a href="{{ base_url }}/search?query={{ search_query }}&amp;fromSeo=0&amp;fromHistory=0&amp;fromSuggest=0&amp;enterFrom=home_page&amp;type=0&amp;sort=1" data-v-69f75cae="">最新优先</a></li>
+                <li class="nav-item" data-v-69f75cae=""><a href="{{ base_url }}/search?query={{ search_query }}&amp;fromSeo=0&amp;fromHistory=0&amp;fromSuggest=0&amp;enterFrom=home_page&amp;type=0&amp;sort=2" data-v-69f75cae="">最热优先</a></li>
               </ul> 
               <div class="dorp-down-area" data-v-69f75cae="">
                 <div class="drop-down" data-v-77151aa1="" data-v-69f75cae=""><li class="dropdown-toggle" data-v-77151aa1="">时间不限<i class="icon" data-v-77151aa1=""></i></li> 
-                  <ul data-v-77151aa1="" class="dropdown-menu hidden">
-                    <li><a href="{{ url_for('search', keyword=search_query, source=source, sort_by='latest', period=0) }}" data-label="时间不限">时间不限</a></li>
-                    <li><a href="{{ url_for('search', keyword=search_query, source=source, sort_by='latest', period=1) }}" data-label="最近一天">最近一天</a></li>
-                    <li><a href="{{ url_for('search', keyword=search_query, source=source, sort_by='latest', period=2) }}" data-label="最近一周">最近一周</a></li>
-                    <li><a href="{{ url_for('search', keyword=search_query, source=source, sort_by='latest', period=3) }}" data-label="最近三月">最近三月</a></li>
+                  <ul data-v-77151aa1="" class="dropdown-menu">
+                    <li data-v-77151aa1="" class=""><a data-v-77151aa1="" href="{{ base_url }}/search?query={{ search_query }}&amp;fromSeo=0&amp;fromHistory=0&amp;fromSuggest=0&amp;enterFrom=home_page&amp;type=0&amp;period=0">时间不限</a></li>
+                    <li data-v-77151aa1="" class=""><a data-v-77151aa1="" href="{{ base_url }}/search?query={{ search_query }}&amp;fromSeo=0&amp;fromHistory=0&amp;fromSuggest=0&amp;enterFrom=home_page&amp;type=0&amp;period=1">最近一天</a></li>
+                    <li data-v-77151aa1="" class=""><a data-v-77151aa1="" href="{{ base_url }}/search?query={{ search_query }}&amp;fromSeo=0&amp;fromHistory=0&amp;fromSuggest=0&amp;enterFrom=home_page&amp;type=0&amp;period=2">最近一周</a></li>
+                    <li data-v-77151aa1="" class=""><a data-v-77151aa1="" href="{{ base_url }}/search?query={{ search_query }}&amp;fromSeo=0&amp;fromHistory=0&amp;fromSuggest=0&amp;enterFrom=home_page&amp;type=0&amp;period=3">最近三月</a></li>
                   </ul>
                 </div>
               </div>
-           
-        
             </nav>
           </header> 
           <div data-v-090682e2="" data-v-69f75cae="">
@@ -121,42 +116,6 @@
     </div>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-          const dropdownToggle = document.querySelector('.dropdown-toggle');
-          const dropdownMenu = document.querySelector('.dropdown-menu');
-          const currentUrl = new URL(window.location.href);
-          const period = currentUrl.searchParams.get('period'); // 获取URL中的period参数
-
-          // 根据period参数更新下拉菜单显示的文本
-          const periodTexts = {
-              '0': '时间不限',
-              '1': '最近一天',
-              '2': '最近一周',
-              '3': '最近三月'
-          };
-          if (periodTexts[period]) {
-              dropdownToggle.innerHTML = periodTexts[period] + '<i class="icon" data-v-77151aa1=""></i>';
-          }
-          
-          dropdownToggle.addEventListener('click', function(e) {
-              e.preventDefault();
-              dropdownMenu.classList.toggle('hidden'); // 切换下拉菜单的可见性
-          });
-
-          // 为每个下拉菜单项添加点击事件监听器
-          document.querySelectorAll('.dropdown-menu a').forEach(item => {
-              item.addEventListener('click', function(e) {
-                  // 阻止链接的默认行为
-                  e.preventDefault();
-                  // 更新.dropdown-toggle的文本为选中项的文本
-                  const selectedText = this.getAttribute('data-label');
-                  dropdownToggle.innerHTML = selectedText + '<i class="icon" data-v-77151aa1=""></i>';
-                  // 关闭下拉菜单
-                  dropdownMenu.classList.add('hidden');
-                  // 触发页面跳转到选中项对应的URL
-                  window.location.href = this.href;
-              });
-          });
-
           document.querySelectorAll('.crawl-article-btn').forEach(button => {
               button.addEventListener('click', function(e) {
                   e.preventDefault();
