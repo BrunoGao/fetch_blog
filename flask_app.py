@@ -6,6 +6,11 @@ import subprocess
 from upload_picture import PictureUploader
 import hashlib
 import shelve
+import requests
+import os
+
+
+
 
 app = Flask(__name__, template_folder='templates')
 
@@ -37,11 +42,10 @@ def search():
         #blogs.extend(search_zhihu(keyword))
         #base_url = "https://www.zhihu.com"
 
- # Remove duplicates based on title and brief
+# Remove duplicates based on title and brief
     unique_blogs = []
     seen = set()
-    for blog in blogs:
-        print (int(blog['last_modify']))
+    for blog in blogs:       
         title_brief_tuple = (blog['title'], blog['brief'])
         if title_brief_tuple not in seen:
             unique_blogs.append(blog)
@@ -61,7 +65,7 @@ def search():
 
         blogs = [blog for blog in blogs if int(blog['last_modify']) == 0 or int(blog['last_modify']) <= time_threshold]
 
-   
+
     # Sorting logic based on sort_by parameter
     if sort_by == 'latest':
         blogs.sort(key=lambda blog: blog['last_modify'], reverse=False)
@@ -95,31 +99,27 @@ app.jinja_env.filters['days_since'] = days_since
 
 # 定义过滤器
 def changeImageUrl(url):
-    # 引入 hashlib 用于生成图片 URL 的 hash 值
-    import hashlib
-    # 引入 shelve 作为简单的持久化字典存储
-    import shelve
-
-    # 计算 URL 的 hash 值作为键
+    # 计算 URL 的 hash 值作为文件名，以避免重复下载
     url_hash = hashlib.md5(url.encode('utf-8')).hexdigest()
-    # 定义缓存文件路径
-    cache_path = 'image_url_cache.db'
+    # 定义图片存储的本地路径
+    local_image_path = f'static/images/{url_hash}.jpg'
 
-    # 使用 shelve 打开缓存文件，with 确保访问完毕后自动关闭
-    with shelve.open(cache_path) as cache:
-        # 检查当前 URL 的 hash 是否已经存在于缓存中
-        if url_hash in cache:
-            # 如果存在，直接返回缓存中的值
-            return cache[url_hash]
-        else:
-            # 如果不存在，进行图片 URL 转换
-            uploader = PictureUploader(config_path='uploader_config.ini')
-            new_url = uploader.upload_picture(pic_url=url.split("#")[0]) if (url.startswith("http")) else url
-            # 将转换后的 URL 存入缓存
-            cache[url_hash] = new_url
-            return new_url
-# 注册过滤器
-app.jinja_env.filters['changeImageUrl'] = changeImageUrl
+    # 检查图片是否已经下载
+    if not os.path.exists(local_image_path):
+        # 图片尚未下载，执行下载
+        try:
+            response = requests.get(url, stream=True)
+            if response.status_code == 200:
+                with open(local_image_path, 'wb') as f:
+                    for chunk in response:
+                        f.write(chunk)
+        except Exception as e:
+            print(f"Failed to download image from {url}. Error: {e}")
+            return url  # 如果下载失败，返回原URL
+
+    # 返回本地服务器上的图片URL
+    return f'/{local_image_path}'
+
 
 def search_csdn(keyword):
     base_url = "https://blog.csdn.net"
@@ -174,12 +174,16 @@ def search_juejin(keyword):
                    
                    # Processing cover_image with changeImageUrl
                    cover_image_url = article_info.get('cover_image', '')
-                   processed_cover_image_url = changeImageUrl(cover_image_url)
+                   #print("cover_image_url: " + str(cover_image_url))
+                   processed_cover_image_url = changeImageUrl(cover_image_url) if cover_image_url else ''
+                   #print("processed_cover_image_url: " + str(processed_cover_image_url))
                    # Appending article details to blogs list
+                   brief = result['content_highlight']
+                   title = result['title_highlight']
                    blogs.append({
-                       'title': article_info['title'],
+                       'title': title,
                        'url': base_url + "/post/" + article_info['article_id'],
-                       'brief': article_info['brief_content'],
+                       'brief': brief,
                        'user_id': base_url + "/user/" +author_info['user_id'],
                        'user_name':  author_info['user_name'],
                        'last_modify': days_since(article_info['mtime']),

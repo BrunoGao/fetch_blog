@@ -14,6 +14,40 @@
       .hidden {
           display: none;
       }
+      .container {
+        max-width: 800px; /* Adjust this value to match the width of the blog list */
+        margin: 0 auto; /* Center the container */
+      }
+      .search-box {
+        display: flex;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        overflow: hidden;
+        max-width: 800px; /* Set a max-width for the search box */
+        margin: 0 auto; /* Center the search box */
+        width: 100%; /* Take full width */
+      }
+
+      .search-box input[type="text"] {
+        border: none;
+        padding: 10px;
+        flex: 1; /* Allow the input to grow and fill the space */
+        border-radius: 20px 0 0 20px;
+        outline: none;
+      }
+
+      .search-box button {
+        background-color: #f8f9fa; /* Light background for the button */
+        border-left: 1px solid #ccc; /* Add a border to separate it from the input */
+        padding: 10px;
+        cursor: pointer;
+      }
+
+      .search-box button .search-icon {
+        fill: #555; /* Change the color of the icon */
+        display: block; /* Ensure the SVG icon is centered */
+        margin: auto; /* Center the icon horizontally */
+      }
   </style>
 
 </head>
@@ -26,8 +60,14 @@
           <ul class="right-side-nav" data-v-925171a8="">   
                 <li class="nav-item search" data-v-925171a8="">
                   <form role="search" action="/search"  class="search-form" data-v-925171a8="" method="post">
-                    <input type="text" name="keyword" placeholder="请输入要搜索的博客...">
-                    <div class="seach-icon-container" data-v-925171a8=""><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="search-icon" data-v-925171a8=""><path d="M12.4008 12.4008C14.744 10.0577 14.744 6.25871 12.4008 3.91556C10.0577 1.57242 6.25871 1.57242 3.91556 3.91556C1.57242 6.25871 1.57242 10.0577 3.91556 12.4008C6.25871 14.744 10.0577 14.744 12.4008 12.4008ZM12.4008 12.4008L15.5828 15.5828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-v-925171a8=""></path></svg></div>
+                    <div class="search-box">
+                      <input type="text" name="keyword" placeholder="请输入要搜索的博客...">
+                      <button type="submit">
+                        <svg class="search-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12.4008 12.4008C14.744 10.0577 14.744 6.25871 12.4008 3.91556C10.0577 1.57242 6.25871 1.57242 3.91556 3.91556C1.57242 6.25871 1.57242 10.0577 3.91556 12.4008C6.25871 14.744 10.0577 14.744 12.4008 12.4008ZM12.4008 12.4008L15.5828 15.5828" stroke="#555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                      </button>
+                    </div>
                   </form>
             </li>
           </ul>
@@ -86,10 +126,10 @@
                             </div> 
                             <div data-v-0347d762="" data-v-65b50b51="" class="info-row title-row">
                               <a data-v-65b50b51="" data-v-0347d762="" href="{{ article.url}}" target="_blank" rel="" class="jj-link title">
-                                    <div data-v-0347d762="" data-v-65b50b51="">{{ article.title }}</div>
+                                    <div data-v-0347d762="" data-v-65b50b51="">{{ article.title|safe }}</div>
                                 </a>
                             </div> 
-                            <div data-v-0347d762="" data-v-65b50b51="" class="info-row abstract-row"><a data-v-65b50b51="" data-v-0347d762="" href="{{ article.url}}" target="_blank" rel="" class="jj-link abstract"><div data-v-0347d762="" data-v-65b50b51="">{{ article.brief}}</div></a></div> 
+                            <div data-v-0347d762="" data-v-65b50b51="" class="info-row abstract-row"><a data-v-65b50b51="" data-v-0347d762="" href="{{ article.url}}" target="_blank" rel="" class="jj-link abstract"><div data-v-0347d762="" data-v-65b50b51="">{{ article.brief|safe}}</div></a></div> 
                             <div data-v-0347d762="" data-v-65b50b51="" class="info-row action-row">
                               <ul data-v-0347d762="" data-v-65b50b51="" class="action-list">
                                 <li data-v-0347d762="" data-v-65b50b51="" class="item like clickable"><a data-v-0347d762="" data-v-65b50b51="" class="title-box"><img data-v-0347d762="" data-v-65b50b51="" src="//lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/e9d76988a7ae3392dc967cfbb64cd887.svg" class="icon"> <span data-v-0347d762="" data-v-65b50b51="" class="count">{{ article.digg_count}}</span></a></li>
