@@ -21,6 +21,7 @@
    ```
 
 ## 使用方法
+### web 界面模式， 支持 juejin 和 csdn。
 
 1. 启动 web server
 
@@ -44,11 +45,17 @@
 6. 复制后的博客如下图:
    ![blog](https://heguang-tech-1300607181.cos.ap-shanghai.myqcloud.com/uPic/image-1.png)
 
+### 命令行模式
+   也可以直接在命令行中运行 `fetch_blog.py` ，命令行模式支持 juejin、csdn、简书和知乎。
+   ```
+   python3 fetch_blog.py -u https://www.jianshu.com/p/609878670 -o ./data
+   ```
+
 ## 主要流程
 
 ```mermaid
 graph TD
-    A[Flask App] --> B((/))
+    A[fetch_blog_web] --> B((/))
     A --> C((/search))
     A --> D((/crawl-article))
     B --> E[Render search.html]
@@ -66,8 +73,10 @@ graph TD
     N -->|Missing| P[Return Error]
     O -->|Success| Q[Return Success Message]
     O -->|Failure| R[Return Failure Message]
+```
+```mermaid   
 graph TD
-    A[ArticleCrawler] -->|init| B[load_config]
+    A[fetch_blog] -->|init| B[load_config]
     A -->|start| C[send_request / send_request_d]
     A -->|parse_detail| D[fetch_author_info]
     A -->|parse_detail| E[deal_code]
