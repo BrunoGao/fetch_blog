@@ -1,28 +1,71 @@
-# article_crawler
+# fetch blog
 
 ## 项目简介
-`article_crawler`是一个用于爬取并保存文章内容的Python脚本。它支持从掘金(juejin)和知乎(zhihu)等平台上爬取文章。
+
+`fetch blog`是一个用于爬取并保存文章内容的Python脚本。它支持从掘金(juejin)和知乎(zhihu)等平台上爬取文章。
 
 ## 安装指南
+
 本项目使用Python编写，要运行此脚本，您需要先确保已安装Python环境。
 
 1. 克隆仓库到本地：
+
    ```
-   git clone https://github.com/your-repository/article_crawler.git
+   git clone https://github.com/BrunoGao/fetch_blog.git
    ```
+
 2. 安装依赖：
+
    ```
    pip install -r requirements.txt
    ```
 
 ## 使用方法
 
-python article_crawler.py -u <文章URL> -o <输出目录>
+1. 启动 web server
 
-示例：
-python article_crawler.py -u https://www.jianshu.com/p/609878670 -o ./data
+   ```
+   python3 fetch_blog_web.py
+   ```
+
+2. 访问 web server
+
+   ```
+   http://localhost:5001/search
+   ```
+
+3. 输入标题进行搜索, 点击 "Search" 
+   ![Search](https://heguang-tech-1300607181.cos.ap-shanghai.myqcloud.com/uPic/image.png)
+
+4. 在下面的博客列表中, 选择要爬取的博客
+
+5. 点击 "一键复制" 
+
+6. 复制后的博客如下图:
+   ![blog](https://heguang-tech-1300607181.cos.ap-shanghai.myqcloud.com/uPic/image-1.png)
+
+## 主要流程
 
 ```mermaid
+graph TD
+    A[Flask App] --> B((/))
+    A --> C((/search))
+    A --> D((/crawl-article))
+    B --> E[Render search.html]
+    C --> F{Request Method}
+    F -->|GET| G[Get keyword, source, sort_by, period from args]
+    F -->|POST| H[Get keyword from form]
+    G --> I[Search Blogs]
+    H --> I
+    I --> J[Remove Duplicates]
+    J --> K[Filter by Period]
+    K --> L[Sort Blogs]
+    L --> M[Render search.html with blogs]
+    D --> N{URL Parameter}
+    N -->|Present| O[Run article_crawler.py]
+    N -->|Missing| P[Return Error]
+    O -->|Success| Q[Return Success Message]
+    O -->|Failure| R[Return Failure Message]
 graph TD
     A[ArticleCrawler] -->|init| B[load_config]
     A -->|start| C[send_request / send_request_d]
@@ -57,9 +100,10 @@ graph TD
     style L fill:#bbf,stroke:#f66,stroke-width:2px
     style M fill:#bbf,stroke:#f66,stroke-width:2px
 ```
+
 ## 功能特性
+
 - 支持从掘金,知乎,csdn和简书平台爬取文章。
-- 简单易用，通过命令行参数控制
+- web 界面搜索, 掘金风格
 - 代码自动识别并高亮
 - 图片自动转存到自己的图床
-
